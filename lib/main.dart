@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
-import 'app/constants/routes.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/app/app_root.dart';
+import 'package:todo/providers/theme_provider.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: GoRouter(routes: listRoute),
-    );
-  }
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/providers/theme_provider.dart';
 
 class NavItem extends StatelessWidget {
   const NavItem({
@@ -16,6 +18,7 @@ class NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context).currentTheme;
     return Expanded(
       child: InkWell(
         onTap: onTap,
@@ -25,11 +28,16 @@ class NavItem extends StatelessWidget {
             Container(
               height: 3,
               width: 28,
-              color: isSelected ? Colors.blue : Colors.transparent,
+              color: isSelected
+                  ? theme.customColors.brand.defaultColor
+                  : theme.customColors.brand.outline,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Icon(icon, color: isSelected ? Colors.blue : Colors.grey),
+              child: Icon(icon,
+                  color: isSelected
+                      ? theme.customColors.brand.defaultColor
+                      : theme.customColors.neutral.defaultColor),
             ),
             const SizedBox(height: 25),
           ],
