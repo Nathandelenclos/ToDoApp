@@ -36,6 +36,5 @@ class NavItem extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

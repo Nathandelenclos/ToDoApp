@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../views/main/main_view.dart';
-import '../views/placeholer_view.dart';
+import '../views/placeholder_view.dart';
 
 Widget material(Widget child) => Material(
       color: Colors.transparent,
