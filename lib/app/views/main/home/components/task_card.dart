@@ -9,6 +9,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context).currentTheme;
     return Container(
+      margin: theme.spacing.horizontal(theme.spacing.sm),
       decoration: BoxDecoration(
         boxShadow: theme.shadows.defaultShadow,
         color: theme.customColors.brand.background,

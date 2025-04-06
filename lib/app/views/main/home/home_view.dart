@@ -10,13 +10,13 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context).currentTheme;
     return SafeArea(
-      child: Container(
-        margin: theme.spacing.all(theme.spacing.xl),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            padding: theme.spacing.horizontal(theme.spacing.lg),
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -40,17 +40,17 @@ class HomeView extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: const TaskCard(),
-                ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: const TaskCard(),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
