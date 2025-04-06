@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo/app/views/main/home/home_view.dart';
 
 import '../views/main/main_view.dart';
 import '../views/placeholder_view.dart';
@@ -22,8 +23,7 @@ final List<RouteBase> listRoute = [
         routes: [
           GoRoute(
             path: Routes.home,
-            builder: (context, state) =>
-                material(const PagePlaceholder(label: "Home")),
+            builder: (context, state) => material(const HomeView()),
           ),
         ],
       ),

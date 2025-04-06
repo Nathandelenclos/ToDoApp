@@ -4,7 +4,7 @@ import 'package:todo/utils/theme/app_theme.dart';
 const AppThemeColors lightThemeColors = AppThemeColors(
   brand: ThemeColorSet(
     dark: Color(0xFF11594B),
-    defaultColor: Color(0xFF1C967E),
+    defaultColor: Color(0xFF24A19C),
     background: Color(0xFFF2F9F9),
     focused: Color(0xFFA9CEC7),
     pressed: Color(0xFF0F4D40),
@@ -42,6 +42,36 @@ const AppThemeColors lightThemeColors = AppThemeColors(
     pressed: Color(0xFFCC6A0E),
     outline: Color(0xFFFEC188),
   ),
+);
+
+const ThemeText lightText = ThemeText(
+  headline:
+      TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
+  title: TextStyle(
+      fontSize: 24, fontWeight: FontWeight.w600, color: Colors.black87),
+  subtitle: TextStyle(
+      fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black87),
+  body: TextStyle(
+      fontSize: 16, fontWeight: FontWeight.normal, color: Colors.black87),
+  caption: TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black54),
+  small: TextStyle(
+      fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black45),
+);
+
+const ThemeText darkText = ThemeText(
+  headline:
+      TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+  title: TextStyle(
+      fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white70),
+  subtitle: TextStyle(
+      fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white70),
+  body: TextStyle(
+      fontSize: 16, fontWeight: FontWeight.normal, color: Colors.white70),
+  caption: TextStyle(
+      fontSize: 14, fontWeight: FontWeight.normal, color: Colors.white60),
+  small: TextStyle(
+      fontSize: 12, fontWeight: FontWeight.normal, color: Colors.white54),
 );
 
 const ThemeShadows lightShadows = ThemeShadows(
@@ -102,7 +132,7 @@ const ThemeShadows darkShadows = ThemeShadows(
 
 final AppTheme lightAppTheme = AppTheme(
   materialTheme: ThemeData.light().copyWith(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: lightThemeColors.brand.background,
     primaryColor: lightThemeColors.brand.defaultColor,
     colorScheme: ColorScheme.light(
       primary: lightThemeColors.brand.defaultColor,
@@ -112,17 +142,20 @@ final AppTheme lightAppTheme = AppTheme(
   customColors: lightThemeColors,
   shadows: lightShadows,
   spacing: defaultSpacing,
+  text: lightText,
 );
 
 final AppTheme darkAppTheme = AppTheme(
-    materialTheme: ThemeData.dark().copyWith(
-      scaffoldBackgroundColor: Colors.black,
-      primaryColor: lightThemeColors.brand.dark,
-      colorScheme: ColorScheme.dark(
-        primary: lightThemeColors.brand.dark,
-        error: lightThemeColors.error.dark,
-      ),
+  materialTheme: ThemeData.dark().copyWith(
+    scaffoldBackgroundColor: Colors.black,
+    primaryColor: lightThemeColors.brand.dark,
+    colorScheme: ColorScheme.dark(
+      primary: lightThemeColors.brand.dark,
+      error: lightThemeColors.error.dark,
     ),
-    customColors: lightThemeColors,
-    shadows: darkShadows,
-    spacing: defaultSpacing);
+  ),
+  customColors: lightThemeColors,
+  shadows: darkShadows,
+  spacing: defaultSpacing,
+  text: darkText,
+);
