@@ -1,13 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo/models/task.dart';
 import 'package:todo/providers/theme_provider.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({super.key});
+  const TaskCard({super.key, required this.task, this.onDelete});
+
+  final Task task;
+  final Function(Task)? onDelete;
+
+  Color _getPriorityColor(int priority) {
+    switch (priority) {
+      case 0:
+        return Colors.grey.shade300;
+      case 1:
+        return Colors.blue;
+      case 2:
+        return Colors.amber;
+      case 3:
+        return Colors.orange;
+      case 4:
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context).currentTheme;
+
     return Container(
       margin: theme.spacing.horizontal(theme.spacing.sm),
       decoration: BoxDecoration(
@@ -18,7 +40,7 @@ class TaskCard extends StatelessWidget {
       child: Column(children: [
         Container(
           decoration: BoxDecoration(
-            color: theme.customColors.brand.defaultColor,
+            color: _getPriorityColor(task.priority),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -33,21 +55,19 @@ class TaskCard extends StatelessWidget {
             spacing: theme.spacing.lg,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 spacing: theme.spacing.sm,
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.add),
-                    style: IconButton.styleFrom(
-                        backgroundColor: theme.customColors.brand.defaultColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: theme.spacing.all(0)),
-                    color: theme.customColors.brand.background,
+                  Text(
+                    task.title,
+                    style: theme.text.title,
                   ),
-                  Text("Tap plus to create a new task ")
+                  Text(
+                    task.description,
+                    style: theme.text.subtitle,
+                  )
                 ],
               ),
               Container(
@@ -59,13 +79,25 @@ class TaskCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Add your Task",
+                    "Date limite : ${task.dueDate.toLocal().toString().split(' ')[0]}",
                     style: theme.text.body,
                   ),
-                  Text(
-                    "Today, Mon 20 Jul 2022",
-                    style: theme.text.body,
-                  )
+                  IconButton(
+                    onPressed: () {
+                      if (onDelete != null) {
+                        onDelete!(task);
+                      }
+                    },
+                    color: theme.customColors.error.defaultColor,
+                    style: IconButton.styleFrom(
+                      backgroundColor: theme.customColors.error.background,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: theme.spacing.all(0),
+                    ),
+                    icon: const Icon(Icons.delete),
+                  ),
                 ],
               ),
             ],
